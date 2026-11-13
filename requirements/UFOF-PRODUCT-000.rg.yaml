@@ -1,0 +1,16 @@
+format: repo-guard/requirement-v1
+id: UFOF-PRODUCT-000
+normative: "### UFOF-PRODUCT-000 — Experimental tactical game integrating OpenXcom mechanics with FGM-based 3D visuals. This is accepted project direction, not evidence of a working implementation."
+lifecycle:
+  accepted: true
+  current: true
+  published: false
+relations:
+  - predicates: [documents]
+    target:
+      kind: artifact
+      path: "README.md"
+  - predicates: [documents]
+    target:
+      kind: artifact
+      path: "docs/requirements-hierarchy.md"
