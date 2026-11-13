@@ -1,41 +1,53 @@
-# UFO Fractal
+# UFO Fractal — экспериментальная тактическая игра
 
-> Experimental tactical game integrating OpenXcom mechanics with FGM-based 3D visuals.
+> Новый 3D-визуализатор и браузерная оболочка тактической игры на основе открытого движка OpenXcom.
 
-**Status:** architecture/bootstrap only; no working product has been delivered.
+**Состояние:** подготовлена архитектурная основа репозитория. Полноценная реализация продукта пока отсутствует.
 
-## Responsibility
+## Задачи проекта
 
-Use OpenXcom as the first planned gameplay authority; retain tactical visibility/collision parity; locally import licensed game resources where permitted; support native and browser play.
+- Использование боевых правил OpenXcom как авторитетной механики на этапе совместимости.
+- Подключение FGM-ресурсов, локально полученных из законно приобретённых игровых данных при соблюдении применимых прав.
+- Изометрическая проекция с возможностью поворота камеры и дальнейшим свободным 3D-обзором.
+- Браузерная игра через C++/WebAssembly, WebGPU и TypeScript.
+- Согласованность отображаемых проходов, укрытий и разрушений с фактическими правилами боя.
 
-## Boundaries
+## Границы ответственности
 
-No playable game, integrated OpenXcom source, or redistributed UFO/TFTD game assets are present yet.
+Исходный код OpenXcom пока не импортирован, работающая игра отсутствует. Проприетарные спрайты, музыка, карты, локально созданные производные ресурсы не входят в публичный репозиторий.
 
-The game-independent program format and normative semantics belong to [fgm-core](https://github.com/netkeep80/fgm-core), not to the regenerator, GPU renderer, or game rules. A cubic spatial hierarchy is an address system, **not** a requirement to display Minecraft-like cubes. Images should stay crisp at high resolutions without excessive visual detail or global blurring.
+Кубическая иерархия задаёт адресацию пространства, но не требует видимой кубической графики. Промежуточный формат FGM не является обычным набором треугольных мешей: он хранит типизированные процедурные программы и параметры генерации.
 
-## Project family
+## Связанные проекты
 
-- [fgm-core](https://github.com/netkeep80/fgm-core)
-- [fgm-regenerator](https://github.com/netkeep80/fgm-regenerator)
-- [fgm-renderer](https://github.com/netkeep80/fgm-renderer)
+- [fgm-core](https://github.com/netkeep80/fgm-core) — канонический формат и исполняемая семантика
+- [fgm-regenerator](https://github.com/netkeep80/fgm-regenerator) — офлайн-реконструкция и компиляция ресурсов
+- [fgm-renderer](https://github.com/netkeep80/fgm-renderer) — отрисовка и управление детализацией
 
-Existing research projects [IsoCubic](https://github.com/netkeep80/isocubic), [FractalGalaxy](https://github.com/netkeep80/FractalGalaxy) and [NNets](https://github.com/netkeep80/NNets) are related explorations, not automatically approved dependencies.
+Предыдущие исследования [IsoCubic](https://github.com/netkeep80/isocubic), [FractalGalaxy](https://github.com/netkeep80/FractalGalaxy) и [NNets](https://github.com/netkeep80/NNets) рассматриваются как возможные источники идей, а не как автоматически принятые программные зависимости.
 
-## Platform direction
+## Технологический стек
 
-C++20 for core algorithms; native and browser/WebAssembly targets; WebGPU/WGSL for optional GPU acceleration; TypeScript for the browser shell; offline neural-network experiments are optional. The canonical CPU semantics are independent of GPU floating-point implementation details.
+Основные алгоритмы планируется разрабатывать на C++20, браузерную версию — собирать в WebAssembly. Для параллельных вычислений на GPU предполагаются WebGPU и WGSL, для оболочки браузера — TypeScript. CPU остаётся эталоном семантики, поэтому результаты GPU-исполнения подлежат независимой проверке.
 
-## RepoGuard v6.0.1
+## Требования и RepoGuard
 
-[The PR workflow](.github/workflows/repo-guard.yml) runs the immutable [RepoGuard](https://github.com/netkeep80/repo-guard) release commit `74db97791e6da8a75287164f0d0b41579108f114` on **exact pull-request BASE and HEAD**. Canonical product/project requirements and relationships live in [requirements/](requirements/); [hierarchy](docs/requirements-hierarchy.md).
+Нормативные требования расположены в каталоге [requirements](requirements/). Их [иерархия](docs/requirements-hierarchy.md) разделяет продуктовые требования и требования к процессу разработки.
 
-The check is about causal traceability, not an assertion that this unimplemented product has passed functional tests. Configure GitHub's **required status check** separately; a workflow without branch protection is not a mandatory merge gate. Technical GREEN is not author acceptance.
+При проверке PR используется **RepoGuard v6.0.1** из неизменяемого коммита `74db97791e6da8a75287164f0d0b41579108f114`. Он анализирует точные снимки BASE и HEAD и причинные связи между требованиями и файлами.
 
-## First experiment
+**Документация ведётся на русском языке.** Это отдельное требование `UFOF-DOC-001`. Исполняемый [контроль языка](scripts/check-document-language.mjs) проверяет все отслеживаемые Markdown-файлы и нормативные формулировки Requirements. [Тесты](tests/document-language.test.mjs) включают положительные и отрицательные сценарии. Проверка запускается внутри того же CI-job, что и RepoGuard, и отражена в его модели свидетельств.
 
-After FGM-0 and the renderer prototype, test a minimal, explicitly licensed OpenXcom integration.
+RepoGuard v6.0.1 сам по себе не распознаёт русский язык; он фиксирует требование, отношение `verified_by` и делегированное исполняемое свидетельство. Реальный анализ текста выполняет отдельный проверяющий скрипт. Проверка CI не заменяет авторское принятие изменений.
 
-## License and source data
+**Защита ветки:** одного workflow недостаточно. Для реального запрета слияния с ошибками необходимо включить обязательную проверку `RepoGuard exact BASE/HEAD` в настройках правил GitHub.
 
-This repository uses GPLv3; see [LICENSE](LICENSE). The license covers original project code only and does not relicense third-party material. OpenXcom source code is GPLv3-or-later, and the original MicroProse/2K UFO and TFTD assets are not freely redistributable by virtue of OpenXcom's open-source license. Do not commit original sprites, music, maps, local conversions of proprietary game assets or derived learned-model datasets. Public tests must use original or license-compatible data.
+## Ближайший этап
+
+После FGM-0 и прототипа рендерера проверить минимальную интеграцию OpenXcom без изменения логики видимости и попаданий.
+
+## Лицензии и игровые ресурсы
+
+Репозиторий распространяется на условиях **GPLv3**, текст приведён в файле [LICENSE](LICENSE). Правовой режим сторонних компонентов и ресурсов не меняется из-за нашей лицензии.
+
+Исходные графические материалы UFO: Enemy Unknown и X-COM: Terror from the Deep не включаются в публичный репозиторий. Открытая лицензия OpenXcom не делает оригинальные игровые ресурсы свободными. Публичные тесты должны использовать собственные либо корректно лицензированные наборы данных.
