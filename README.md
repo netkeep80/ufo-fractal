@@ -20,7 +20,7 @@ UFO Fractal **не является попиксельным ремастеро�
 
 Это архитектурная и художественная цель, **не заявление об автоматическом снятии авторских прав**: узнаваемые оригинальные персонажи, карты, дизайны и другие охраняемые художественные элементы могут сохранять правовые ограничения даже после математической регенерации. Локальный импорт лицензионных материалов и публично распространяемые свободные сцены разделяются. Лицензия кода OpenXcom не распространяет автоматически права на данные UFO.
 
-**Разработка и проверка:** [задача #5](https://github.com/netkeep80/ufo-fractal/issues/5). Связанные спецификации: [fgm-core #13](https://github.com/netkeep80/fgm-core/issues/13), [fgm-regenerator #15](https://github.com/netkeep80/fgm-regenerator/issues/15), [fgm-renderer #14](https://github.com/netkeep80/fgm-renderer/issues/14). Реализация и нормативные тесты ещё предстоят.
+**Разработка и проверка:** [игровая задача #5](https://github.com/netkeep80/ufo-fractal/issues/5), [актуальный план FGM Platform #15](https://github.com/netkeep80/fgm-platform/issues/15) и [граница игрового клиента #13](https://github.com/netkeep80/fgm-platform/issues/13). Математические и визуальные модули уже объединены в Platform; реализация тактической игры, её адаптера и нормативных тестов ещё предстоит.
 
 ## Границы ответственности
 
@@ -30,9 +30,11 @@ UFO Fractal **не является попиксельным ремастеро�
 
 ## Связанные проекты
 
-- [fgm-core](https://github.com/netkeep80/fgm-core) — канонический формат и исполняемая семантика
-- [fgm-regenerator](https://github.com/netkeep80/fgm-regenerator) — офлайн-реконструкция и компиляция ресурсов
-- [fgm-renderer](https://github.com/netkeep80/fgm-renderer) — отрисовка и управление детализацией
+- [FGM Platform](https://github.com/netkeep80/fgm-platform) — единственный действующий монорепозиторий универсальных компонентов FGM.
+- [`core/`](https://github.com/netkeep80/fgm-platform/tree/main/core) — канонический формат, Eval/C05 и исполняемая семантика.
+- [`regenerator/`](https://github.com/netkeep80/fgm-platform/tree/main/regenerator) — реконструкция и подготовка FGM-пакетов.
+- [`renderer/`](https://github.com/netkeep80/fgm-platform/tree/main/renderer) — вывод, камера, Studio и управление детализацией.
+- [Граница интеграции UFO Fractal с Platform](docs/fgm-platform-integration.md) — единственный актуальный upstream и запрет на зависимость от исчезающих исходных репозиториев.
 
 Предыдущие исследования [IsoCubic](https://github.com/netkeep80/isocubic), [FractalGalaxy](https://github.com/netkeep80/FractalGalaxy) и [NNets](https://github.com/netkeep80/NNets) рассматриваются как возможные источники идей, а не как автоматически принятые программные зависимости.
 
@@ -54,7 +56,7 @@ RepoGuard v6.0.1 сам по себе не распознаёт русский �
 
 ## Ближайший этап
 
-После FGM-0 и прототипа рендерера проверить минимальную интеграцию OpenXcom без изменения логики видимости и попаданий.
+После опубликованной Platform Studio 1.16 следующий **игровой** срез — независимый контракт OpenXcom→FGM WorldSnapshot и минимальная интеграция без изменения авторитетной логики видимости, коллизий и попаданий. Готовность Platform не означает готовности игры. Контроль — [эпик #4](https://github.com/netkeep80/ufo-fractal/issues/4).
 
 ## Лицензии и игровые ресурсы
 

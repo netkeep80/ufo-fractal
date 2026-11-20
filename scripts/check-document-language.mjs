@@ -9,7 +9,7 @@ import { pathToFileURL } from "node:url";
 const CYR = /[А-Яа-яЁё]/;
 const TICK = String.fromCharCode(96);
 const TERMS = new Set([
-  "fgm", "fgm-core", "fgm-regenerator", "fgm-renderer", "ufo-fractal",
+  "fgm", "fgm-platform", "ufo-fractal",
   "ufo", "tftd", "openxcom", "isocubic", "fractalgalaxy", "nnets",
   "webgpu", "webgl", "wgsl", "wasm", "webassembly", "typescript", "javascript",
   "pytorch", "python", "sdl", "github", "ci", "cpu", "gpu", "api", "cli",

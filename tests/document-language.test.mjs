@@ -4,7 +4,7 @@ import { audit } from "../scripts/check-document-language.mjs";
 
 test("русская документация и технические идентификаторы допускаются", () => {
   const files = new Map([
-    ["README.md", "# Назначение FGM\n\nГеометрия строится по правилам FGM и WebGPU.\n\n- [fgm-core](https://github.com/netkeep80/fgm-core)\n"],
+    ["README.md", "# Назначение FGM\n\nГеометрия строится по правилам FGM и WebGPU.\n\n- [fgm-platform](https://github.com/netkeep80/fgm-platform)\n"],
     ["docs/архитектура.md", "## Цели\n\nРусский текст с упоминанием GPU.\n"],
     ["requirements/TEST-001.rg.yaml", 'format: repo-guard/requirement-v1\nid: TEST-001\nnormative: "Обязательное требование на русском языке"\n'],
   ]);
